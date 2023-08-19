@@ -5,9 +5,9 @@ import cloudinary from "cloudinary";
 
 import { Search } from "lucide-react";
 
-export default async function Home() {
+export default async function Favorite() {
   const results = await cloudinary.v2.search
-    .expression("resource_type:image")
+    .expression("resource_type:image AND tags=favorite")
     .sort_by("created_at", "desc")
     .with_field("tags")
     .max_results(30)
@@ -15,18 +15,8 @@ export default async function Home() {
     //console.log(results.resources)
   return (
     <main className="py-4 px-4 ">
-      <h2 className="text-xl md:text-3xl xl:text-4xl font-semibold">Gallery</h2>
-      <div className="flex items-center sm:justify-between gap-x-1 mt-2 md:mt-4">
-        <div className="w-full sm:w-[40%] border rounded-md px-1 py-2 sm:px-3 flex items-center  gap-x-2">
-          <input
-            type="text"
-            className="w-full bg-transparent text-sm text-muted-foreground font-medium"
-            placeholder="search photos,videos.."
-          />
-          <Search className="text-muted" />
-        </div>
-        <UploadButton />
-      </div>
+      <h2 className="text-xl md:text-3xl xl:text-4xl font-semibold">Favorites</h2>
+     
       
         <MasonryGrid
         images={results.resources}

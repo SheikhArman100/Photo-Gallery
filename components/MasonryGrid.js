@@ -1,0 +1,23 @@
+
+import React from "react";
+
+const MAX_COLUMNS=4
+const MasonryGrid = ({ images,
+  getImage, }) => {
+    function getColumns(colIndex) {
+    return images.filter((resource, idx) => idx % MAX_COLUMNS === colIndex);
+  }
+  return (
+    <div className="h-screen overflow-y-auto scrollbar my-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg lg:gap-4 ">
+      {[getColumns(0), getColumns(1), getColumns(2), getColumns(3)].map(
+        (column, idx) => (
+          <div key={idx} className="flex flex-col gap-4">
+            {column.map(getImage)}
+          </div>
+        )
+      )}
+    </div>
+  );
+};
+
+export default MasonryGrid;
