@@ -1,5 +1,5 @@
 "use client";
-import { Album, Delete,  HeartIcon, MoreVertical } from "lucide-react";
+import { Album, Delete, HeartIcon, MoreVertical } from "lucide-react";
 import { CldImage } from "next-cloudinary";
 import { Button } from "./ui/button.jsx";
 import React, { useState, useTransition } from "react";
@@ -14,10 +14,11 @@ import {
 } from "./ui/dropdown-menu.jsx";
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 import { setAsFavoriteAction } from "@/app/_action.js";
+import AddToAlbum from "./AddToAlbum.js";
 
-const CloudinaryImage = ({ publicId,tags, ...props }) => {
+const CloudinaryImage = ({ publicId, tags, ...props }) => {
   const [isFavorite, setIsFavorite] = useState(tags.includes("favorite"));
-   const [transition, startTransition] = useTransition();
+  const [transition, startTransition] = useTransition();
 
   return (
     <div className="relative w-full">
@@ -34,7 +35,7 @@ const CloudinaryImage = ({ publicId,tags, ...props }) => {
         <button
           onClick={() => {
             setIsFavorite(!isFavorite);
-             startTransition(() => {
+            startTransition(() => {
               setAsFavoriteAction(publicId, !isFavorite);
             });
           }}
@@ -60,13 +61,14 @@ const CloudinaryImage = ({ publicId,tags, ...props }) => {
             <DropdownMenuLabel>Options</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Album className="mr-2 h-4 w-4" />
-                <span>Add to album</span>
+              <DropdownMenuItem asChild>
+                <AddToAlbum />
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Delete className="mr-2 h-4 w-4" />
-                <span>Delete</span>
+              <DropdownMenuItem asChild>
+                <Button variant="ghost">
+                  <Delete className="mr-2 h-4 w-4" />
+                  <span>Delete</span>
+                </Button>
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
