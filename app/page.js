@@ -1,4 +1,6 @@
 import CloudinaryImage from "@/components/CloudinaryImage.js";
+import FavoriteButton from "@/components/FavoriteButton.js";
+import ImageOptions from "@/components/ImageOptions.js";
 import MasonryGrid from "@/components/MasonryGrid.js";
 import UploadButton from "@/components/UploadButton.js";
 import cloudinary from "cloudinary";
@@ -35,9 +37,11 @@ export default async function Home() {
             <CloudinaryImage
               key={imageData.public_id}
               publicId={imageData.public_id}
-              tags={imageData.tags}
               
-            />
+              >
+                <FavoriteButton publicId={imageData.public_id} tags={imageData.tags}/>
+                <ImageOptions publicId={imageData.public_id}/>
+              </CloudinaryImage>
           );
         }}
       />

@@ -1,4 +1,6 @@
 import CloudinaryImage from "@/components/CloudinaryImage.js";
+import FavoriteButton from "@/components/FavoriteButton.js";
+import ImageOptions from "@/components/ImageOptions.js";
 import MasonryGrid from "@/components/MasonryGrid.js";
 import UploadButton from "@/components/UploadButton.js";
 import cloudinary from "cloudinary";
@@ -12,26 +14,30 @@ export default async function Favorite() {
     .with_field("tags")
     .max_results(30)
     .execute();
-    //console.log(results.resources)
+  //console.log(results.resources)
   return (
     <main className="py-4 px-4 ">
-      <h2 className="text-xl md:text-3xl xl:text-4xl font-semibold">Favorites</h2>
-     
-      
-        <MasonryGrid
+      <h2 className="text-xl md:text-3xl xl:text-4xl font-semibold">
+        Favorites
+      </h2>
+
+      <MasonryGrid
         images={results.resources}
         getImage={(imageData) => {
           return (
             <CloudinaryImage
               key={imageData.public_id}
               publicId={imageData.public_id}
-              tags={imageData.tags}
-              
-            />
+            >
+              <FavoriteButton
+                publicId={imageData.public_id}
+                tags={imageData.tags}
+              />
+              <ImageOptions />
+            </CloudinaryImage>
           );
         }}
       />
-      
     </main>
   );
 }
