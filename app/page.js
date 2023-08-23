@@ -37,10 +37,9 @@ export default async function Home() {
             <CloudinaryImage
               key={imageData.public_id}
               publicId={imageData.public_id}
-              
               >
-                <FavoriteButton publicId={imageData.public_id} tags={imageData.tags}/>
-                <ImageOptions publicId={imageData.public_id}/>
+                <FavoriteButton key={imageData.public_id} publicId={imageData.public_id} tags={imageData.tags}/>
+                <ImageOptions key={imageData.public_id} publicId={imageData.public_id}/>
               </CloudinaryImage>
           );
         }}

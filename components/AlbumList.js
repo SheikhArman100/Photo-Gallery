@@ -1,8 +1,10 @@
 import React from "react";
-//import cloudinary from "cloudinary";
+import cloudinary from "cloudinary";
 import AddToAlbumButton from "@/app/AddToAlbumButton.js";
 
-const AlbumList = async ({publicId,folders}) => {
+const AlbumList = async ({publicId}) => {
+  const { folders } = await cloudinary.v2.api.root_folders();
+
   
 
   return (

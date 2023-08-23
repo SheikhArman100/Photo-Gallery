@@ -42,7 +42,9 @@ const ImageOptions = async ({ publicId }) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <AddToAlbumDialog publicId={publicId}/>
+            <AddToAlbumDialog>
+              <AlbumList publicId={publicId}/>
+            </AddToAlbumDialog>
              
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
